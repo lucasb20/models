@@ -28,7 +28,7 @@ few box predictor architectures are shared across many models.
 """
 from abc import abstractmethod
 import tensorflow.compat.v1 as tf
-from tf.compat.v1.keras.layers import Layer
+from keras import layers
 
 BOX_ENCODINGS = 'box_encodings'
 CLASS_PREDICTIONS_WITH_BACKGROUND = 'class_predictions_with_background'
@@ -135,7 +135,7 @@ class BoxPredictor(object):
     pass
 
 
-class KerasBoxPredictor(Layer):
+class KerasBoxPredictor(layers.Layer):
   """Keras-based BoxPredictor."""
 
   def __init__(self, is_training, num_classes, freeze_batchnorm,
