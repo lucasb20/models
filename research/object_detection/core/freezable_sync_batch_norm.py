@@ -14,7 +14,7 @@
 # ==============================================================================
 
 """A freezable batch norm layer that uses Keras sync batch normalization."""
-from tf.compat.v1.keras.layers import BatchNormalization
+from keras.layers import BatchNormalization
 
 
 class FreezableSyncBatchNorm(BatchNormalization
