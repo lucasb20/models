@@ -27,7 +27,7 @@ from object_detection.core import box_predictor
 from object_detection.utils import shape_utils
 from object_detection.utils import static_shape
 
-keras = tf.keras.layers
+from keras import layers
 
 BOX_ENCODINGS = box_predictor.BOX_ENCODINGS
 CLASS_PREDICTIONS_WITH_BACKGROUND = (
@@ -321,7 +321,7 @@ class WeightSharedConvolutionalBoxPredictor(box_predictor.KerasBoxPredictor):
     if inserted_layer_counter >= 0:
       use_bias = False if (self._apply_batch_norm and not
                            self._conv_hyperparams.force_use_bias()) else True
-      projection_layers.append(keras.Conv2D(
+      projection_layers.append(layers.Conv2D(
           target_channel, [1, 1], strides=1, padding='SAME',
           name='ProjectionLayer/conv2d_{}'.format(inserted_layer_counter),
           **self._conv_hyperparams.params(use_bias=use_bias)))
