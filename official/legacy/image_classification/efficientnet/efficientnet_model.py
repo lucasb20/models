@@ -487,10 +487,20 @@ class EfficientNet(keras.Model):
 
     config = model_configs[model_name]
 
-    model = cls(config=config, overrides=overrides)
+    model = {
+        'efficientnet_b0': tf.keras.applications.EfficientNetB0,
+        'efficientnet_b1': tf.keras.applications.EfficientNetB1,
+        'efficientnet_b2': tf.keras.applications.EfficientNetB2,
+        'efficientnet_b3': tf.keras.applications.EfficientNetB3,
+        'efficientnet_b4': tf.keras.applications.EfficientNetB4,
+        'efficientnet_b5': tf.keras.applications.EfficientNetB5,
+        'efficientnet_b6': tf.keras.applications.EfficientNetB6,
+        'efficientnet_b7': tf.keras.applications.EfficientNetB7
+    }[model_name](include_top=False,
+                            input_shape=[None, None, 3])
 
     if model_weights_path:
       common_modules.load_weights(
           model, model_weights_path, weights_format=weights_format)
-
+      
     return model
