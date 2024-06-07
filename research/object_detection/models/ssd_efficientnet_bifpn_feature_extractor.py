@@ -28,14 +28,8 @@ from object_detection.meta_architectures import ssd_meta_arch
 from object_detection.models import bidirectional_feature_pyramid_generators as bifpn_generators
 from object_detection.utils import ops
 from object_detection.utils import shape_utils
-from object_detection.utils import tf_version
 
-# pylint: disable=g-import-not-at-top
-if tf_version.is_tf2():
-  try:
-    from official.legacy.image_classification.efficientnet import efficientnet_model
-  except ModuleNotFoundError:
-    from official.vision.image_classification.efficientnet import efficientnet_model
+from official.legacy.image_classification.efficientnet import efficientnet_model
 
 _EFFICIENTNET_LEVEL_ENDPOINTS = {
     1: 'stack_0/block_0/project_bn',
@@ -186,11 +180,12 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
       efficientnet_overrides['batch_norm'] = 'tpu'
     efficientnet_base = efficientnet_model.EfficientNet.from_name(
         model_name=self._efficientnet_version, overrides=efficientnet_overrides)
-    outputs = [efficientnet_base.get_layer(output_layer_name)
+    outputs = [efficientnet_base.get_layer(output_layer_name).output
                for output_layer_name in self._output_layer_names]
     # debug
-    print("efficient_base:",efficientnet_base)
-    print("efficient_base.input:",efficientnet_base.input)
+    print("efficient_base:", efficientnet_base)
+    print("dir(efficient):", dir(efficientnet_base))
+    print("bases(efficient):", efficientnet_base.__bases__)
     self._efficientnet = keras.Model(
         inputs=efficientnet_base.input, outputs=outputs)
     self.classification_backbone = efficientnet_base
