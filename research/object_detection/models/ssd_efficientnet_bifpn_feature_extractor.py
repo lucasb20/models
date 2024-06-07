@@ -186,7 +186,7 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
       efficientnet_overrides['batch_norm'] = 'tpu'
     efficientnet_base = efficientnet_model.EfficientNet.from_name(
         model_name=self._efficientnet_version, overrides=efficientnet_overrides)
-    outputs = [efficientnet_base.get_layer(output_layer_name).output
+    outputs = [keras.layers.Lambda(lambda: efficientnet_base.get_layer(output_layer_name).output)
                for output_layer_name in self._output_layer_names]
     self._efficientnet = keras.Model(
         inputs=keras.Input(shape=efficientnet_base.input.shape[1:]), outputs=outputs)
