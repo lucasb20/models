@@ -19,7 +19,7 @@ models.
 """
 import abc
 from absl import logging
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 from tensorflow.python.util.deprecation import deprecated_args
 from object_detection.core import box_list
 from object_detection.core import box_list_ops
