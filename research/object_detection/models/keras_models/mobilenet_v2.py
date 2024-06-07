@@ -320,15 +320,14 @@ def mobilenet_v2(batchnorm_training,
   Returns:
       A Keras model instance.
   """
-  layers_override = _LayersOverride(
-      batchnorm_training,
-      default_batchnorm_momentum=default_batchnorm_momentum,
-      conv_hyperparams=conv_hyperparams,
-      use_explicit_padding=use_explicit_padding,
-      min_depth=min_depth,
-      alpha=alpha,
-      conv_defs=conv_defs)
+  # layers_override = _LayersOverride(
+  #     batchnorm_training,
+  #     default_batchnorm_momentum=default_batchnorm_momentum,
+  #     conv_hyperparams=conv_hyperparams,
+  #     use_explicit_padding=use_explicit_padding,
+  #     min_depth=min_depth,
+  #     alpha=alpha,
+  #     conv_defs=conv_defs)
   return tf.keras.applications.MobileNetV2(alpha=alpha,
-                                           layers=layers_override,
                                            **kwargs)
 # pylint: enable=invalid-name
