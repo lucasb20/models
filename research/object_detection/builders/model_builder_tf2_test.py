@@ -503,16 +503,13 @@ class ModelBuilderTF2Test(
 
     feature_extractor = model._feature_extractor
     # Verify the upsampling layers in the FPN use 'bilinear' interpolation.
-    fpn = feature_extractor.get_layer('mobilenetv2_2.00_None')
+    fpn = feature_extractor.get_layer('model')
     num_up_sampling2d_layers = 0
     for layer in fpn.layers:
       if 'up_sampling2d' in layer.name:
         num_up_sampling2d_layers += 1
         self.assertEqual('bilinear', layer.interpolation)
     # Verify that there are up_sampling2d layers.
-    # debug
-    print("feature_extractor:", feature_extractor)
-    print("fpn.layers:", fpn.layers)
     self.assertGreater(num_up_sampling2d_layers, 0)
 
     # Verify that the FPN ops uses separable conv.
