@@ -521,7 +521,7 @@ class ModelBuilderTF2Test(
 
     # Verify that the backbone indeed double the number of channel according to
     # the depthmultiplier.
-    backbone = feature_extractor.get_layer('model')
+    backbone = feature_extractor.get_layer('mobilenetv2_2.00_None')
     first_conv = backbone.get_layer('Conv1')
     # Note that the first layer typically has 32 filters, but this model has
     # a depth multiplier of 2.
