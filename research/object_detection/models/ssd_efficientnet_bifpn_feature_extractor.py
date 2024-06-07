@@ -186,11 +186,10 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
       efficientnet_overrides['batch_norm'] = 'tpu'
     efficientnet_base = efficientnet_model.EfficientNet.from_name(
         model_name=self._efficientnet_version, overrides=efficientnet_overrides)
-    inputs = keras.Input(shape=efficientnet_base.input.shape[1:])
-    outputs = keras.layers.add([efficientnet_base.get_layer(output_layer_name)(inputs)
-               for output_layer_name in self._output_layer_names])
+    outputs = [efficientnet_base.get_layer(output_layer_name).output
+               for output_layer_name in self._output_layer_names]
     self._efficientnet = keras.Model(
-        inputs=inputs, outputs=outputs)
+        inputs=keras.Input(shape=efficientnet_base.input.shape[1:]), outputs=outputs)
     self.classification_backbone = efficientnet_base
     self._bifpn_stage = None
 
