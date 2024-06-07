@@ -38,7 +38,7 @@ from __future__ import print_function
 import os
 
 from absl import logging
-import tensorflow as tf, tf_keras
+import tensorflow as tf
 
 DEFAULT_IMAGE_SIZE = 224
 NUM_CHANNELS = 3
@@ -272,7 +272,7 @@ def get_parse_record_fn(use_keras_image_data_format=False):
   def parse_record_fn(raw_record, is_training, dtype):
     image, label = parse_record(raw_record, is_training, dtype)
     if use_keras_image_data_format:
-      if tf_keras.backend.image_data_format() == 'channels_first':
+      if tf.keras.backend.image_data_format() == 'channels_first':
         image = tf.transpose(image, perm=[2, 0, 1])
     return image, label
 
@@ -527,7 +527,7 @@ def _resize_image(image, height, width):
     resized_image: A 3-D tensor containing the resized image. The first two
       dimensions have the shape [height, width].
   """
-  return tf.compat.v1.image.resize(
+  return tf.image.resize(
       image, [height, width],
       method=tf.image.ResizeMethod.BILINEAR,
       align_corners=False)

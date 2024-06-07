@@ -184,8 +184,7 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
                for output_layer_name in self._output_layer_names]
     # debug
     print("efficient_base:", efficientnet_base)
-    print("dir(efficient):", dir(efficientnet_base))
-    print("bases(efficient):", efficientnet_base.__bases__)
+    print("dir(efficient):", type(efficientnet_base))
     self._efficientnet = keras.Model(
         inputs=efficientnet_base.input, outputs=outputs)
     self.classification_backbone = efficientnet_base

@@ -189,8 +189,8 @@ def create_upsample_feature_map_ops(scale, use_native_resize_op, name):
 
     def resize_nearest_neighbor(image):
       image_shape = shape_utils.combined_static_and_dynamic_shape(image)
-      return tf.compat.v1.image.resize_nearest_neighbor(
-          image, [image_shape[1] * scale, image_shape[2] * scale])
+      return tf.image.resize(
+          image, (image_shape[1]*scale, image_shape[2]*scale), method='nearest')
 
     layers.append(
         tf.keras.layers.Lambda(
