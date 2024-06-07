@@ -510,6 +510,9 @@ class ModelBuilderTF2Test(
         num_up_sampling2d_layers += 1
         self.assertEqual('bilinear', layer.interpolation)
     # Verify that there are up_sampling2d layers.
+    # debug
+    print("feature_extractor:", feature_extractor)
+    print("fpn.layers:", fpn.layers)
     self.assertGreater(num_up_sampling2d_layers, 0)
 
     # Verify that the FPN ops uses separable conv.
