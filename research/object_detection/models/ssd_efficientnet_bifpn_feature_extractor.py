@@ -21,7 +21,8 @@ from __future__ import print_function
 from absl import logging
 from six.moves import range
 from six.moves import zip
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
+import keras
 
 from object_detection.meta_architectures import ssd_meta_arch
 from object_detection.models import bidirectional_feature_pyramid_generators as bifpn_generators
@@ -187,8 +188,8 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
         model_name=self._efficientnet_version, overrides=efficientnet_overrides)
     outputs = [efficientnet_base.get_layer(output_layer_name).output
                for output_layer_name in self._output_layer_names]
-    self._efficientnet = tf.keras.Model(
-        inputs=efficientnet_base.inputs, outputs=outputs)
+    self._efficientnet = keras.Model(
+        inputs=efficientnet_base.input, outputs=outputs)
     self.classification_backbone = efficientnet_base
     self._bifpn_stage = None
 
