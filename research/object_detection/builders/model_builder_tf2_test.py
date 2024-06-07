@@ -503,7 +503,7 @@ class ModelBuilderTF2Test(
 
     feature_extractor = model._feature_extractor
     # Verify the upsampling layers in the FPN use 'bilinear' interpolation.
-    fpn = feature_extractor.get_layer('model')
+    fpn = feature_extractor.get_layer('functional_1')
     num_up_sampling2d_layers = 0
     for layer in fpn.layers:
       if 'up_sampling2d' in layer.name:
