@@ -189,7 +189,7 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
     outputs = [efficientnet_base.get_layer(output_layer_name).output
                for output_layer_name in self._output_layer_names]
     self._efficientnet = keras.Model(
-        inputs=efficientnet_base.input, outputs=outputs)
+        inputs=keras.Input(tensor=efficientnet_base.input), outputs=outputs)
     self.classification_backbone = efficientnet_base
     self._bifpn_stage = None
 
