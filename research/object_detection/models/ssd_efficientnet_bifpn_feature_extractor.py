@@ -177,10 +177,23 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
     if (conv_hyperparams.use_sync_batch_norm() and
         is_tpu_strategy(tf.distribute.get_strategy())):
       efficientnet_overrides['batch_norm'] = 'tpu'
-    efficientnet_base = efficientnet_model.EfficientNet.from_name(
-        model_name=self._efficientnet_version, overrides=efficientnet_overrides)
-    outputs = [efficientnet_base.get_layer(output_layer_name).output
-               for output_layer_name in ['block3b_add', 'block5c_add', 'top_activation']]
+    efficientnet_base = {
+        'efficientnet_b0': tf.keras.applications.EfficientNetB0,
+        'efficientnet_b1': tf.keras.applications.EfficientNetB1,
+        'efficientnet_b2': tf.keras.applications.EfficientNetB2,
+        'efficientnet_b3': tf.keras.applications.EfficientNetB3,
+        'efficientnet_b4': tf.keras.applications.EfficientNetB4,
+        'efficientnet_b5': tf.keras.applications.EfficientNetB5,
+        'efficientnet_b6': tf.keras.applications.EfficientNetB6,
+        'efficientnet_b7': tf.keras.applications.EfficientNetB7
+    }[self._efficientnet_version](include_top=False,
+                            input_shape=[None, None, 3])
+
+    outputs = [efficientnet_base.get_layer(layer_name).output for layer_name in [
+        'block3b_add',
+        'block5c_add',
+        'top_activation'
+        ]]
     self._efficientnet = tf.keras.Model(
         inputs=efficientnet_base.inputs, outputs=outputs)
     self.classification_backbone = efficientnet_base
