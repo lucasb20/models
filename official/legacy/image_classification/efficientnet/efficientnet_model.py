@@ -502,8 +502,4 @@ class EfficientNet(tf.keras.Model):
     model = models[model_name](include_top=False,
                             input_shape=[None, None, model.config.input_channels])
 
-    if model_weights_path:
-      common_modules.load_weights(
-          model, model_weights_path, weights_format=weights_format)
-
     return model
