@@ -70,6 +70,8 @@ def create_conv_block(name, num_filters, kernel_size, strides, padding,
     # here, since this is not the case in feature_map_generators.py
     kwargs['pointwise_regularizer'] = kwargs['kernel_regularizer']
     kwargs['pointwise_initializer'] = kwargs['kernel_initializer']
+    del kwargs['kernel_regularizer']
+    del kwargs['kernel_initializer']
     layers.append(
         tf.keras.layers.SeparableConv2D(
             filters=num_filters,
