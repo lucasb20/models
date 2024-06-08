@@ -165,9 +165,9 @@ class KerasLayerHyperparams(object):
       activation function is None.
     """
     if self._activation_fn:
-      return tf.keras.layers.Lambda(self._activation_fn, name=name)
+      return tf.keras.layers.Lambda(self._activation_fn)
     else:
-      return tf.keras.layers.Lambda(tf.identity, name=name)
+      return tf.keras.layers.Lambda(tf.identity)
 
   def get_regularizer_weight(self):
     """Returns the l1 or l2 regularizer weight.
