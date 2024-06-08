@@ -77,7 +77,6 @@ def create_conv_block(name, num_filters, kernel_size, strides, padding,
             depth_multiplier=1,
             padding=padding,
             strides=strides,
-            name=name + 'separable_conv',
             **kwargs))
   else:
     layers.append(
