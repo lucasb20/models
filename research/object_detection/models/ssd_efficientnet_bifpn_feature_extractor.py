@@ -177,11 +177,6 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
     if (conv_hyperparams.use_sync_batch_norm() and
         is_tpu_strategy(tf.distribute.get_strategy())):
       efficientnet_overrides['batch_norm'] = 'tpu'
-    # debug
-    print("self efficient version:", self._efficientnet_version)
-    print("'efficientnet-b0' != ?")
-    print("type:", type(self._efficientnet_version))
-    
     efficientnet_base = {
         'efficientnet-b0': tf.keras.applications.EfficientNetB0,
         'efficientnet-b1': tf.keras.applications.EfficientNetB1,
