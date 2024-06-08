@@ -139,29 +139,25 @@ def create_downsample_feature_map_ops(scale, downsample_method,
         tf.keras.layers.MaxPooling2D(
             pool_size=kernel_size,
             strides=stride,
-            padding=padding,
-            name=name + 'downsample_max_x{}'.format(stride)))
+            padding=padding))
   elif downsample_method == 'avg_pooling':
     layers.append(
         tf.keras.layers.AveragePooling2D(
             pool_size=kernel_size,
             strides=stride,
-            padding=padding,
-            name=name + 'downsample_avg_x{}'.format(stride)))
+            padding=padding))
   elif downsample_method == 'depthwise_conv':
     layers.append(
         tf.keras.layers.DepthwiseConv2D(
             kernel_size=kernel_size,
             strides=stride,
-            padding=padding,
-            name=name + 'downsample_depthwise_x{}'.format(stride)))
+            padding=padding))
     layers.append(
         conv_hyperparams.build_batch_norm(
-            training=(is_training and not freeze_batchnorm),
-            name=name + 'downsample_batchnorm'))
+            training=(is_training and not freeze_batchnorm))
+            )
     layers.append(
-        conv_hyperparams.build_activation_layer(name=name +
-                                                'downsample_activation'))
+        conv_hyperparams.build_activation_layer())
   else:
     raise ValueError('Unknown downsample method: {}'.format(downsample_method))
 
