@@ -278,6 +278,7 @@ class BiFPNCombineLayer(tf.keras.layers.Layer):
         'attention', or 'fast_attention'.
       **kwargs: Additional Keras layer arguments.
     """
+    del kwargs['name']
     super(BiFPNCombineLayer, self).__init__(**kwargs)
     self.combine_method = combine_method
 
