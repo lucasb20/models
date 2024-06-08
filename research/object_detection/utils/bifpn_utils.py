@@ -86,7 +86,6 @@ def create_conv_block(name, num_filters, kernel_size, strides, padding,
             kernel_size=kernel_size,
             padding=padding,
             strides=strides,
-            name=name + 'conv',
             **conv_hyperparams.params()))
 
   if apply_batchnorm:
