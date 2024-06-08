@@ -189,8 +189,7 @@ def create_upsample_feature_map_ops(scale, use_native_resize_op, name):
 
     layers.append(
         tf.keras.layers.Lambda(
-            resize_nearest_neighbor,
-            name=name + 'nearest_neighbor_upsampling_x{}'.format(scale)))
+            resize_nearest_neighbor))
   else:
 
     def nearest_neighbor_upsampling(image):
@@ -198,8 +197,7 @@ def create_upsample_feature_map_ops(scale, use_native_resize_op, name):
 
     layers.append(
         tf.keras.layers.Lambda(
-            nearest_neighbor_upsampling,
-            name=name + 'nearest_neighbor_upsampling_x{}'.format(scale)))
+            nearest_neighbor_upsampling,))
 
   return layers
 
