@@ -180,7 +180,7 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
     efficientnet_base = efficientnet_model.EfficientNet.from_name(
         model_name=self._efficientnet_version, overrides=efficientnet_overrides)
     outputs = [efficientnet_base.get_layer(output_layer_name).output
-               for output_layer_name in self._output_layer_names]
+               for output_layer_name in ['block3b_add', 'block5c_add', 'top_activation']]
     self._efficientnet = tf.keras.Model(
         inputs=efficientnet_base.inputs, outputs=outputs)
     self.classification_backbone = efficientnet_base
