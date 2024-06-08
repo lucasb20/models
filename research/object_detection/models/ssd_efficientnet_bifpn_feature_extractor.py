@@ -178,14 +178,14 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
         is_tpu_strategy(tf.distribute.get_strategy())):
       efficientnet_overrides['batch_norm'] = 'tpu'
     efficientnet_base = {
-        'efficientnet_b0': tf.keras.applications.EfficientNetB0,
-        'efficientnet_b1': tf.keras.applications.EfficientNetB1,
-        'efficientnet_b2': tf.keras.applications.EfficientNetB2,
-        'efficientnet_b3': tf.keras.applications.EfficientNetB3,
-        'efficientnet_b4': tf.keras.applications.EfficientNetB4,
-        'efficientnet_b5': tf.keras.applications.EfficientNetB5,
-        'efficientnet_b6': tf.keras.applications.EfficientNetB6,
-        'efficientnet_b7': tf.keras.applications.EfficientNetB7
+        'efficientnet-b0': tf.keras.applications.EfficientNetB0,
+        'efficientnet-b1': tf.keras.applications.EfficientNetB1,
+        'efficientnet-b2': tf.keras.applications.EfficientNetB2,
+        'efficientnet-b3': tf.keras.applications.EfficientNetB3,
+        'efficientnet-b4': tf.keras.applications.EfficientNetB4,
+        'efficientnet-b5': tf.keras.applications.EfficientNetB5,
+        'efficientnet-b6': tf.keras.applications.EfficientNetB6,
+        'efficientnet-b7': tf.keras.applications.EfficientNetB7
     }[self._efficientnet_version](include_top=False,
                             input_shape=[None, None, 3])
 
