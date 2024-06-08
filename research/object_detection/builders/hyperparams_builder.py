@@ -118,6 +118,7 @@ class KerasLayerHyperparams(object):
     else:
       new_batch_norm_params = self._batch_norm_params.copy()
     new_batch_norm_params.update(overrides)
+    del new_batch_norm_params['name']
     return new_batch_norm_params
 
   def build_batch_norm(self, training=None, **overrides):
