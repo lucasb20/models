@@ -196,7 +196,8 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
         ]]
     self._efficientnet = tf.keras.Model(
         inputs=efficientnet_base.inputs, outputs=outputs)
-    self.classification_backbone = efficientnet_base
+    self.classification_backbone = efficientnet_model.EfficientNet.from_name(
+        model_name=self._efficientnet_version, overrides=efficientnet_overrides)
     self._bifpn_stage = None
 
   def build(self, input_shape):
@@ -251,10 +252,6 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
 
     base_feature_maps = self._efficientnet(
         ops.pad_to_multiple(preprocessed_inputs, self._pad_to_multiple))
-
-    # debug
-    for e in list(zip(self._output_layer_alias, base_feature_maps)):
-      print(e)
 
     output_feature_map_dict = self._bifpn_stage(
         list(zip(self._output_layer_alias, base_feature_maps)))
