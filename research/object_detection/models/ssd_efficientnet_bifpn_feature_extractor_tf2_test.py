@@ -17,7 +17,7 @@ import unittest
 from absl.testing import parameterized
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from google.protobuf import text_format
 from object_detection.builders import hyperparams_builder
@@ -27,7 +27,7 @@ from object_detection.utils import test_case
 from object_detection.utils import tf_version
 
 
-def _count_params(model, trainable_only=True):
+def _count_params(model, trainable_only=False):
   """Returns the count of all model parameters, or just trainable ones."""
   if not trainable_only:
     return model.count_params()
