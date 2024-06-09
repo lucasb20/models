@@ -457,7 +457,7 @@ class KerasBiFpnFeatureMaps(tf.keras.Model):
       all_node_params.append(node_config)
       all_node_names.append(node_config['name'])
 
-  def call(self, feature_pyramid):
+  def __call__(self, feature_pyramid):
     """Compute BiFPN feature maps from input feature pyramid.
 
     Executed when calling the `.__call__` method on input.
