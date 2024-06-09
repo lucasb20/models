@@ -252,6 +252,10 @@ class SSDEfficientNetBiFPNKerasFeatureExtractor(
     base_feature_maps = self._efficientnet(
         ops.pad_to_multiple(preprocessed_inputs, self._pad_to_multiple))
 
+    # debug
+    for e in list(zip(self._output_layer_alias, base_feature_maps)):
+      print(e)
+
     output_feature_map_dict = self._bifpn_stage(
         list(zip(self._output_layer_alias, base_feature_maps)))
 
