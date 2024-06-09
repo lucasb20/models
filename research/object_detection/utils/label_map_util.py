@@ -168,8 +168,6 @@ def load_labelmap(path, validator=None):
   Returns:
     a StringIntLabelMapProto
   """
-  # debug
-  print("path:", path)
   with tf.io.gfile.GFile(path, 'r') as fid:
     label_map_string = fid.read()
     label_map = string_int_label_map_pb2.StringIntLabelMap()
@@ -177,6 +175,9 @@ def load_labelmap(path, validator=None):
       text_format.Merge(label_map_string, label_map)
     except text_format.ParseError:
       label_map.ParseFromString(label_map_string)
+    except tf.errors.NotFoundError:
+      return
+
   if validator is None:
     validator = _validate_label_map
   validator(label_map)
