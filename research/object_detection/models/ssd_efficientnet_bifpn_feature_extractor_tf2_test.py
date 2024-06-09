@@ -27,7 +27,7 @@ from object_detection.utils import test_case
 from object_detection.utils import tf_version
 
 
-def _count_params(model, trainable_only=False):
+def _count_params(model, trainable_only=True):
   """Returns the count of all model parameters, or just trainable ones."""
   if not trainable_only:
     return model.count_params()
@@ -163,13 +163,13 @@ class SSDEfficientNetBiFPNFeatureExtractorTest(
         bifpn_combine_method=bifpn_combine_method)
     _ = feature_extractor(np.zeros((2, 256, 256, 3), dtype=np.float32))
     expected_params = {
-        'efficientdet-d0': 5484829,
-        'efficientdet-d1': 8185156,
-        'efficientdet-d2': 9818153,
-        'efficientdet-d3': 13792706,
-        'efficientdet-d4': 22691445,
-        'efficientdet-d5': 35795677,
-        'efficientdet-d6-d7': 53624512,
+        'efficientdet-d0': 4434012,
+        'efficientdet-d1': 7226339,
+        'efficientdet-d2': 8841848,
+        'efficientdet-d3': 12913249,
+        'efficientdet-d4': 21954596,
+        'efficientdet-d5': 35282236,
+        'efficientdet-d6-d7': 53588367,
     }
     num_params = _count_params(feature_extractor)
     self.assertEqual(expected_params[efficientdet_version], num_params)
