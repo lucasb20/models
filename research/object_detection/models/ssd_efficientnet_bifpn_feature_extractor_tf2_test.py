@@ -163,13 +163,13 @@ class SSDEfficientNetBiFPNFeatureExtractorTest(
         bifpn_combine_method=bifpn_combine_method)
     _ = feature_extractor(np.zeros((2, 256, 256, 3), dtype=np.float32))
     expected_params = {
-        'efficientdet-d0': 4434012,
-        'efficientdet-d1': 7226339,
-        'efficientdet-d2': 8841848,
-        'efficientdet-d3': 12913249,
-        'efficientdet-d4': 21954596,
-        'efficientdet-d5': 35282236,
-        'efficientdet-d6-d7': 53588367,
+        'efficientdet-d0': 4388149,
+        'efficientdet-d1': 7157596,
+        'efficientdet-d2': 8763969,
+        'efficientdet-d3': 12808666,
+        'efficientdet-d4': 21801613,
+        'efficientdet-d5': 35073781,
+        'efficientdet-d6-d7': 53310168,
     }
     num_params = _count_params(feature_extractor)
     self.assertEqual(expected_params[efficientdet_version], num_params)
